@@ -15,7 +15,7 @@ compileJava {
 }
 
 task buildTest{
-	dependsOn jar
+	dependsOn build dependsOn clean 
 	final warName = "$rootProject.rootDir"
 	println "war 이름 : ${warName}"
 }
