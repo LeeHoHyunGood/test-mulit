@@ -2,6 +2,8 @@ package com.jojoldu.aws.jenkins.batch;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -43,6 +45,9 @@ public class SampleBatchConfiguration {
         return stepBuilderFactory.get("step")
                 .tasklet((contribution, chunkContext) -> {
                     log.info("샘플 배치입니다!");
+                    JobExecution je = chunkContext.getStepContext().getStepExecution().getJobExecution();
+                    JobParameters jp = je.getJobParameters();
+                    log.info("잡파라미터 version값 =>{}",jp.getString("version"));
                     return RepeatStatus.FINISHED;
                 })
                 .build();
