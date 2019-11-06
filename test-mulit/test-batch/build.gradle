@@ -14,16 +14,19 @@ compileJava {
 	options.failOnError = false
 }
 
+task jarFileTest(type: Copy) {
+	final jarName = jar.archivePath.path
+	println "jar 이름 : ${jarName}"
+	println "jar 파일 전송 시작"
+	from "${jarName}"
+	into "/home/test"
+	println "jar 파일 전송 종료"
+}
+
 task buildTest(dependsOn: build){
 	final rootName = "$rootProject.rootDir"
 	println "rootName 이름 : ${rootName}"
-	final jarName = jar.archivePath.path
-	println "jar 이름 : ${jarName}"
 	finalizedBy{
-		println "jar 파일 전송 시작"
-		
-		put from: "${jarName}", into: "/home/test"
-	
-		println "jar 파일 전송 종료"
+		jarFileTest
 	}
 }
