@@ -19,10 +19,11 @@ task buildTest(dependsOn: build){
 	println "rootName 이름 : ${rootName}"
 	final jarName = jar.archivePath.path
 	println "jar 이름 : ${jarName}"
+	finalizedBy{
+		println "jar 파일 전송 시작"
+		
+		put from: "${jarName}", into: "/home/test"
 	
-	println "jar 파일 전송 시작"
-	
-	put from: "${jarName}", into: "/home/test"
-
-	println "jar 파일 전송 종료"
+		println "jar 파일 전송 종료"
+	}
 }
