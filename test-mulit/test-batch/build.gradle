@@ -21,6 +21,8 @@ task buildTest(dependsOn: build){
 	println "jar 이름 : ${jarName}"
 	
 	println "jar 파일 전송 시작"
-	put from: ${jarName}", into: /home/test/
+	
+	put from: "${jarName}", into: "/home/test"
+
 	println "jar 파일 전송 종료"
 }
