@@ -23,10 +23,16 @@ task jarFileTest(type: Copy) {
 	println "jar 파일 전송 종료"
 }
 
-task buildTest(dependsOn: build){
-	final rootName = "$rootProject.rootDir"
-	println "rootName 이름 : ${rootName}"
+task mvJarTest(type: Exec) {
+	final jarName = jar.archivePath.path
+	
+	workingDir "$rootProject.rootDir"
+	commandLine 'rm /home/test/test-batch-0.0.2.jar'
+	commandLine "mv ${jarName} /home/test/"
+}
+
+task buildTest(dependsOn: jar){
 	finalizedBy{
-		jarFileTest
+		mvJarTest
 	}
 }
