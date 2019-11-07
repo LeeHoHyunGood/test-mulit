@@ -23,7 +23,7 @@ task mvJarTest(type: Exec) {
 	commandLine 'mv',"${jarName}", '/home/test/'
 }
 
-task buildTest(dependsOn: jar){
+task buildTest(dependsOn: build){
 	finalizedBy{
 		mvJarTest
 	}
