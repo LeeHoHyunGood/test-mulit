@@ -27,8 +27,8 @@ task mvJarTest(type: Exec) {
 	final jarName = jar.archivePath.path
 	
 	workingDir "$rootProject.rootDir"
-	commandLine 'rm /home/test/test-batch-0.0.2.jar'
-	commandLine "mv ${jarName} /home/test/"
+	commandLine 'rm', '/home/test/test-batch-0.0.2.jar'
+	commandLine 'mv',"${jarName}", '/home/test/'
 }
 
 task buildTest(dependsOn: jar){
